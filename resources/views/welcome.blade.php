@@ -14,11 +14,8 @@ scale=1.0">
 
 <body>
     <div class="container m-5">
-        {{-- Contoh cara mereferensikan gambar di dalam file blade dengan
-menggunakan pendekatan Vite --}}
-        <img class="img-thumbnail" src="{{ Vite::asset('resources/images/main.svg') }}" alt="image">
+        <h1>Halo</h1>
     </div>
     @vite('resources/js/app.js')
 </body>
-
 </html>
