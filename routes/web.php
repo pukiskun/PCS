@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('data', [DataController::class, 'index']);
+Route::get('create', [DataController::class, 'create']);
