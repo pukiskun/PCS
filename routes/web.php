@@ -23,3 +23,4 @@ Route::get('create', [DataController::class, 'create']);
 Route::post('store', [DataController::class, 'store']);
 Route::get('delete/{id}', [DataController::class, 'destroy']);
 Route::get('detail/{id}', [DataController::class, 'show']);
+Route::get('edit/{id}', [DataController::class, 'edit']);

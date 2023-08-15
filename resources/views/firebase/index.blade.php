@@ -36,11 +36,7 @@
                                 <td>{{ $item['nama'] }}</td>
                                 <td>{{ $item['keterangan'] }}</td>
                                 {{-- <td>{{ $item['QRCode'] }}</td> --}}
-                                <td class="col-3">
-                                    <a href="#" class="btn btn-warning px-xl-4">Edit</a>
-                                    <a href="{{ url('delete/' . $key) }}" class="btn btn-danger px-sm-4">Delete</a>
-                                    <a href="{{ url('detail/' . $key) }}" class="btn btn-primary px-sm-4">code</a>
-                                </td>
+                                <td>@include('firebase.actions')</td>
                             </tr>
                         @empty
                             <tr>
