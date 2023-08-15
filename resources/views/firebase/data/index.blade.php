@@ -8,11 +8,7 @@
             </div>
             <div class="col-lg-3 col-xl-2">
                 <div class="d-grid gap-2">
-<<<<<<< HEAD
                     <a href="{{ url('create')}}" class="btn btn-secondary">Tambah Data</a>
-=======
-                    <a href="{{ url('create') }}" class="btn btn-secondary">Tambah Artikel</a>
->>>>>>> 9de1166958bdf1c9a89522ef490954935db8a53d
                 </div>
             </div>
         </div>
@@ -28,12 +24,8 @@
                         <th>ID</th>
                         <th>Nama</th>
                         <th>Keterangan</th>
-<<<<<<< HEAD
-                        <th></th>
-=======
                         <th>QR Code</th>
                         <th>Actions</th>
->>>>>>> 9de1166958bdf1c9a89522ef490954935db8a53d
                     </tr>
                 </thead>
                 <tbody>
