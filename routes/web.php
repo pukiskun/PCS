@@ -20,3 +20,4 @@ Route::get('/', function () {
 
 Route::get('data', [DataController::class, 'index']);
 Route::get('create', [DataController::class, 'create']);
+Route::get('delete/{ID}', [DataController::class, 'destroy']);
