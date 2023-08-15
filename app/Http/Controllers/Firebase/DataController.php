@@ -26,21 +26,18 @@ class DataController extends Controller
         return view('firebase.data.create', ['pageTitle' => $pageTitle]);
     }
 
-    public function store()
+    public function store(Request $request)
     {
         $postData = [
-            id => $request->input('ID'),
-            name => $request->input('Nama'),
-            detail => $request->input('Keterangan'),
+            'id' => $request->id,
+            'nama' => $request->nama,
+            'keterangan' => $request->keterangan,
         ];
         $postRef = $this->database->getReference($this->tablename)->push($postData);
-        if($postRef)
-        {
-            return redirect('index')->with('status', 'Data Berhasil Ditambahkan');
-        }
-        else
-        {
-            return redirect('index')->with('status', 'Data Tidak Berhasil Ditambahkan');
+        if ($postRef) {
+            return redirect('data')->with('status', 'Data Berhasil Ditambahkan');
+        } else {
+            return redirect('firebase.data.index')->with('status', 'Data Tidak Berhasil Ditambahkan');
         }
     }
 

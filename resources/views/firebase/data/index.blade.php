@@ -8,14 +8,14 @@
             </div>
             <div class="col-lg-3 col-xl-2">
                 <div class="d-grid gap-2">
-                    <a href="{{ url('create')}}" class="btn btn-secondary">Tambah Data</a>
+                    <a href="{{ url('create') }}" class="btn btn-secondary">Tambah Data</a>
                 </div>
             </div>
         </div>
         <hr class="my-4">
         <div class="table-responsive border p-4 rounded-3">
-            @if(session('status'))
-                <h4 class="alert alert-warning mb-2">{{session('status')}}</h4>
+            @if (session('status'))
+                <h4 class="alert alert-warning mb-2">{{ session('status') }}</h4>
             @endif
 
             <table class="table table-bordered table-hover table-striped" id="articleTable">
@@ -24,7 +24,7 @@
                         <th>ID</th>
                         <th>Nama</th>
                         <th>Keterangan</th>
-                        <th>QR Code</th>
+                        {{-- <th>QR Code</th> --}}
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -32,10 +32,10 @@
                     @if ($fdata)
                         @forelse ($fdata as $key => $item)
                             <tr>
-                                <td>{{ $item['ID'] }}</td>
-                                <td>{{ $item['Nama'] }}</td>
-                                <td>{{ $item['Keterangan'] }}</td>
-                                <td>{{ $item['QRCode'] }}</td>
+                                <td>{{ $item['id'] }}</td>
+                                <td>{{ $item['nama'] }}</td>
+                                <td>{{ $item['keterangan'] }}</td>
+                                {{-- <td>{{ $item['QRCode'] }}</td> --}}
                                 <td class="col-2">
                                     <a href="#" class="btn btn-warning px-xl-4">Edit</a>
                                     <a href="{{ url('delete/' . $key) }}" class="btn btn-danger px-sm-4">Delete</a>

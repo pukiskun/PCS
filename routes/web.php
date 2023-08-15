@@ -20,5 +20,5 @@ Route::get('/', function () {
 
 Route::get('data', [DataController::class, 'index']);
 Route::get('create', [DataController::class, 'create']);
-Route::get('create', [DataController::class, 'store']);
+Route::post('store', [DataController::class, 'store']);
 Route::get('delete/{ID}', [DataController::class, 'destroy']);
