@@ -17,13 +17,13 @@ class DataController extends Controller
     {
         $fdata = $this->database->getReference($this->tablename)->getValue();
         $pageTitle = 'data';
-        return view('firebase.data.index', ['pageTitle' => $pageTitle, 'fdata' => $fdata]);
+        return view('firebase.index', ['pageTitle' => $pageTitle, 'fdata' => $fdata]);
     }
 
     public function create()
     {
         $pageTitle = 'create';
-        return view('firebase.data.create', ['pageTitle' => $pageTitle]);
+        return view('firebase.create', ['pageTitle' => $pageTitle]);
     }
 
     public function store(Request $request)
@@ -37,7 +37,7 @@ class DataController extends Controller
         if ($postRef) {
             return redirect('data')->with('status', 'Data Berhasil Ditambahkan');
         } else {
-            return redirect('firebase.data.index')->with('status', 'Data Tidak Berhasil Ditambahkan');
+            return redirect('firebase.index')->with('status', 'Data Tidak Berhasil Ditambahkan');
         }
     }
 
@@ -47,6 +47,21 @@ class DataController extends Controller
         $deleted = $this->database->getReference($this->tablename . '/' . $key)->remove();
         if ($deleted) {
             return redirect('data');
+        }
+    }
+
+    public function edit(Request $id)
+    {
+        $pageTitle = 'Edit';
+        $key = $id;
+        $editdata = $this->database->getReference($this->tablename)->getchild($key)->getValue();
+        if($editdata)
+        {
+            return view('firebase.edit', ['pageTitle' => $pageTitle]);
+        }
+        else
+        {
+            return redirect('data')->with('status', 'ID Data Tidak Ditemukan');
         }
     }
 }
