@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Firebase;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Kreait\Firebase\Contract\Database;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class DataController extends Controller
 {
@@ -18,6 +19,15 @@ class DataController extends Controller
         $fdata = $this->database->getReference($this->tablename)->getValue();
         $pageTitle = 'data';
         return view('firebase.data.index', ['pageTitle' => $pageTitle, 'fdata' => $fdata]);
+    }
+
+    public function show($id)
+    {
+        $pageTitle = 'detail';
+        $code = QrCode::generate($id);
+        return view('firebase.data.show', ['pageTitle' => $pageTitle, 'code' => $code]);
+
+
     }
 
     public function create()
