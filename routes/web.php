@@ -20,8 +20,5 @@ Route::get('/', function () {
 
 Route::get('data', [DataController::class, 'index']);
 Route::get('create', [DataController::class, 'create']);
-<<<<<<< HEAD
 Route::get('create', [DataController::class, 'store']);
-=======
 Route::get('delete/{ID}', [DataController::class, 'destroy']);
->>>>>>> 9de1166958bdf1c9a89522ef490954935db8a53d
