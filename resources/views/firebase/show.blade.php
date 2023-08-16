@@ -2,4 +2,4 @@
 
 @section('content')
     <p>{{ $code }}</p>
-@endsection
+@endsection;

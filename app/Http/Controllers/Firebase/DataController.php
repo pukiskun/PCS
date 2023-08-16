@@ -25,7 +25,7 @@ class DataController extends Controller
     {
         $pageTitle = 'detail';
         $code = QrCode::generate($id);
-        return view('firebase.data.show', ['pageTitle' => $pageTitle, 'code' => $code]);
+        return view('firebase.show', ['pageTitle' => $pageTitle, 'code' => $code]);
 
 
     }
