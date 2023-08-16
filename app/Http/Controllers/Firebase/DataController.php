@@ -66,9 +66,25 @@ class DataController extends Controller
         $key = $id;
         $editdata = $this->database->getReference($this->tablename)->getChild($key)->getValue();
         if ($editdata) {
-            return view('firebase.edit', ['pageTitle' => $pageTitle, 'editdata' => $editdata]);
+            return view('firebase.edit', ['pageTitle' => $pageTitle, 'editdata' => $editdata, 'key' => $key]);
         } else {
             return view('data');
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        $key = $id;
+        $updateData = [
+            'id' => $request->id,
+            'nama' => $request->nama,
+            'keterangan' => $request->keterangan,
+        ];
+        $res_updated = $this->database->getReference($this->tablename . '/' . $key)->update($updateData);
+        if ($res_updated) {
+            return redirect('data')->with('status', 'Data Berhasil Diperbarui');
+        } else {
+            return redirect('data')->with('status', 'Data Tidak Berhasil Diperbarui');
         }
     }
 }
