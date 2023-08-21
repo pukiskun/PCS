@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Firebase;
 
+use BaconQrCode\Encoder\AlphaNumeric;
 use Illuminate\Http\Request;
+use BaconQrCode\Encoder\QrCode;
+use Barryvdh\DomPDF\Facade\Pdf;
+use BaconQrCode\Renderer\Image\Png;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\View;
 use Kreait\Firebase\Contract\Database;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class DataController extends Controller
 {
@@ -24,9 +28,23 @@ class DataController extends Controller
     public function show($id)
     {
         $pageTitle = 'detail';
-        $code = QrCode::generate($id);
-        return view('firebase.show', ['pageTitle' => $pageTitle, 'code' => $code]);
 
+        // Replace 'Your QR code data here' with the actual data
+        $data = 'Your QR code data here';
+
+        // Create a QR code encoder
+        $encoder = new QrCode($data);
+
+        // Create a PNG renderer
+        $renderer = new Png();
+        $renderer->setWidth(200); // Adjust the width as needed
+        $renderer->setHeight(200); // Adjust the height as needed
+
+        // Render the QR code as a PNG image
+        $png = $renderer->render($encoder);
+
+        // Render the 'firebase.show' view and pass data to it
+        return View::make('firebase.show', compact('pageTitle', 'png', 'id'));
 
     }
 
@@ -38,8 +56,13 @@ class DataController extends Controller
 
     public function store(Request $request)
     {
+        if ($request->keterangan == 'box') {
+            $temp = 'box-';
+        } else {
+            $temp = 'esa-';
+        }
         $postData = [
-            'id' => $request->id,
+            'id' => $temp . $request->id,
             'nama' => $request->nama,
             'keterangan' => $request->keterangan,
         ];
@@ -86,5 +109,15 @@ class DataController extends Controller
         } else {
             return redirect('data')->with('status', 'Data Tidak Berhasil Diperbarui');
         }
+    }
+
+    public function generatePDF($id)
+    {
+        $pageTitle = 'download';
+        $data = QrCode::format('svg')->size(200)->errorCorrection('H')->generate('string');
+
+        $pdf = PDF::loadview('firebase.show', ['code' => $data, 'key' => $id, 'pageTitle' => $pageTitle]);
+
+        return $pdf->stream();
     }
 }

@@ -25,3 +25,4 @@ Route::get('delete/{id}', [DataController::class, 'destroy']);
 Route::get('detail/{id}', [DataController::class, 'show']);
 Route::get('edit/{id}', [DataController::class, 'edit']);
 Route::put('update/{id}', [DataController::class, 'update']);
+Route::get('download/{id}', [DataController::class, 'generatePDF']);
