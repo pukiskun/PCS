@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Firebase;
 
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Kreait\Firebase\Contract\Database;
@@ -24,8 +25,17 @@ class DataController extends Controller
     public function show($id)
     {
         $pageTitle = 'detail';
-        $code = QrCode::generate($id);
-        return view('firebase.show', ['pageTitle' => $pageTitle, 'code' => $code]);
+
+        $tablename = $this->tablename;
+        $itemKey = $id;
+        $columnToRetrieve = 'id';
+
+
+        $data = $this->database->getReference($tablename . '/' . $itemKey . '/' . $columnToRetrieve)->getValue();
+
+        $code = QrCode::format('svg')->size(200)->errorCorrection('H')->generate($data);
+        return view('firebase.show', ['pageTitle' => $pageTitle, 'code' => $code, 'key' => $id]);
+
 
 
     }
@@ -38,8 +48,13 @@ class DataController extends Controller
 
     public function store(Request $request)
     {
+        if ($request->keterangan == 'box') {
+            $temp = 'box';
+        } else {
+            $temp = 'esa';
+        }
         $postData = [
-            'id' => $request->id,
+            'id' => $temp . $request->id,
             'nama' => $request->nama,
             'keterangan' => $request->keterangan,
         ];
@@ -87,4 +102,6 @@ class DataController extends Controller
             return redirect('data')->with('status', 'Data Tidak Berhasil Diperbarui');
         }
     }
+
+
 }
