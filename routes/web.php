@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\Firebase\DataController;
 
 /*
@@ -25,4 +26,4 @@ Route::get('delete/{id}', [DataController::class, 'destroy']);
 Route::get('detail/{id}', [DataController::class, 'show']);
 Route::get('edit/{id}', [DataController::class, 'edit']);
 Route::put('update/{id}', [DataController::class, 'update']);
-Route::get('download/{id}', [DataController::class, 'generatePDF']);
+Route::get('download/{id}', [PDFController::class, 'generatePDF']);
