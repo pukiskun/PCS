@@ -16,5 +16,4 @@ initial-scale=1.0">
     @vite('resources/js/app.js')
     @vite('resources/css/app.css')
 </body>
-
 </html>
