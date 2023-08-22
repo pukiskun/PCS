@@ -16,10 +16,7 @@ use App\Http\Controllers\Firebase\DataController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-
+Route::get('/', [HomeController::class, 'index']);
 Route::get('data', [DataController::class, 'index']);
 Route::get('create', [DataController::class, 'create']);
 Route::post('store', [DataController::class, 'store']);

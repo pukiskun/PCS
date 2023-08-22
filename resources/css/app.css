@@ -1,0 +1,11 @@
+body {
+    background-color: #EDFFF1;
+}
+
+.navbar-brand img {
+    max-width: 150px;
+}
+
+.navbar-nav a {
+    color: #32713F;
+}
