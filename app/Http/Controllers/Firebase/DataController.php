@@ -28,7 +28,7 @@ class DataController extends Controller
 
         $tablename = $this->tablename;
         $itemKey = $id;
-        $columnToRetrieve = 'id';
+        $columnToRetrieve = 'nama';
 
 
         $data = $this->database->getReference($tablename . '/' . $itemKey . '/' . $columnToRetrieve)->getValue();
