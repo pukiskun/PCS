@@ -15,13 +15,21 @@ use App\Http\Controllers\Firebase\DataController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/', function () {
+    return view('auth.login', ['pageTitle'=>'login']);
+});
 
-Route::get('/', [HomeController::class, 'index']);
-Route::get('data', [DataController::class, 'index']);
-Route::get('create', [DataController::class, 'create']);
-Route::post('store', [DataController::class, 'store']);
-Route::get('delete/{id}', [DataController::class, 'destroy']);
-Route::get('detail/{id}', [DataController::class, 'show']);
-Route::get('edit/{id}', [DataController::class, 'edit']);
-Route::put('update/{id}', [DataController::class, 'update']);
-Route::get('download/{id}', [PDFController::class, 'generatePDF']);
+Route::middleware(['auth'])->group(function () {
+    // Route home
+    Route::get('home', [HomeController::class, 'index'])->name('home');
+    Route::get('data', [DataController::class, 'index']);
+    Route::get('create', [DataController::class, 'create']);
+    Route::post('store', [DataController::class, 'store']);
+    Route::get('delete/{id}', [DataController::class, 'destroy']);
+    Route::get('detail/{id}', [DataController::class, 'show']);
+    Route::get('edit/{id}', [DataController::class, 'edit']);
+    Route::put('update/{id}', [DataController::class, 'update']);
+    Route::get('download/{id}', [PDFController::class, 'generatePDF']);
+});
+
+Auth::routes();
